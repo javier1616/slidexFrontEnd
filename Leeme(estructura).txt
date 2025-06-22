@@ -1,0 +1,25 @@
+/my-project
+│
+├── index.html                # Punto de entrada principal
+├── /assets                   # Archivos estáticos (imágenes, íconos, fuentes)
+│   └── logo.png
+│
+├── /css
+│   └── styles.css            # Estilos generales o globales
+│
+├── /js
+│   ├── main.js               # Script principal, inicialización de la app
+│   ├── router.js             # Enrutador SPA para manejo de vistas
+│   ├── api.js                # Funciones para conectarte a tu API REST
+│   ├── utils.js              # Funciones utilitarias
+│   └── /views
+│       ├── home.js           # Vista Home
+│       ├── login.js          # Vista Login
+│       └── ...               # Otras vistas
+│
+├── /components               # Componentes reutilizables como navbar, footer
+│   ├── navbar.js
+│   └── footer.js
+│
+└── /data                     # Datos estáticos o simulados (mock JSON, config)
+    └── config.js
