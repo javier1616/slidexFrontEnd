@@ -1,0 +1,183 @@
+/* Contenedor principal del home */
+.slidex-home-container {
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* evita scroll general */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9f9f9;
+    color: #222;
+}
+
+/* Secciones base con padding y margin */
+.slidex-section {
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+    flex-shrink: 0;
+    /* que no se encojan */
+}
+
+/* Títulos grandes */
+.slidex-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #007bff;
+    text-align: center;
+}
+
+/* Subtítulos */
+.slidex-subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: #555;
+    text-align: center;
+}
+
+/* Botones principales */
+.slidex-cta-btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    background-color: #007bff;
+    user-select: none;
+}
+
+.slidex-cta-btn:hover {
+    background-color: rgba(241, 163, 19, 0.637);
+}
+
+/* Contenedor de características - flex sin scroll */
+.slidex-home-features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0 2rem 2rem 2rem;
+    margin-bottom: 3rem;
+    /* quitamos overflow-y y flex-grow */
+}
+
+/* Tarjetas de características */
+.slidex-feature-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+    max-width: 320px;
+    flex: 1 1 300px;
+    user-select: none;
+}
+
+.slidex-feature-card:hover .slidex-feature-icon {
+    transition: box-shadow 0.5s ease;
+    color: #f08c0a;
+}
+
+/* Iconos de features */
+.slidex-feature-icon {
+    font-size: 3.5rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+}
+
+
+
+/* Título dentro de feature */
+.slidex-feature-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #222;
+}
+
+/* Descripción dentro de feature */
+.slidex-feature-desc {
+    font-size: 1rem;
+    color: #444;
+}
+
+/* Footer CTA con centrado */
+.slidex-home-cta-footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    flex-shrink: 0;
+    background: #f0f4ff;
+    border-top: 1px solid #ddd;
+}
+
+/* Efecto tilt para cards */
+.slidex-tilt:hover {
+    transform: perspective(600px) rotateX(5deg) rotateY(5deg);
+    transition: transform 0.3s ease;
+}
+
+/* Scrollbar personalizado para .slidex-home-features (opcional, si luego querés) */
+/*
+  .slidex-home-features::-webkit-scrollbar {
+    width: 8px;
+  }
+  .slidex-home-features::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  .slidex-home-features::-webkit-scrollbar-thumb {
+    background: #007bff;
+    border-radius: 4px;
+  }
+  .slidex-home-features::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+  }
+  */
+
+/* === BOTÓN PRINCIPAL CTA === */
+.slidex-cta-strong {
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: rgb(235, 235, 235);
+    background: linear-gradient(135deg, #ff6600, #007bff);
+    background-size: 200% 200%;
+    border: none;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 0.6s ease;
+    animation: gradientShift 6s ease infinite;
+}
+
+.slidex-cta-strong:hover {
+    color: white;
+    background-position: 100% 0;
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(0, 123, 255, 0.35);
+}
+
+/* === ANIMACIÓN DE PULSO AL HACER HOVER === */
+.slidex-cta-animate:hover {
+    animation: slidexPulseHover 1.5s infinite;
+}
+
+@keyframes slidexPulseHover {
+    0% {
+        transform: scale(1.05);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1.05);
+    }
+}

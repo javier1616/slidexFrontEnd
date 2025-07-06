@@ -1,0 +1,320 @@
+/* === Variables globales === */
+:root {
+    --gris-super-claro: #ECEBF1;
+    --azul-oscuro: #137CA5;
+    --azul-claro: #009BB5;
+    --naranja: #F1634A;
+    --naranja-claro: #E27662;
+    --blanco: #ffffff;
+    --sombra-suave: rgba(0, 0, 0, 0.08);
+    --sombra-media: rgba(0, 0, 0, 0.15);
+    --sombra-fuerte: rgba(0, 0, 0, 0.25);
+}
+
+/* === NAVBAR BASE === */
+.custom-navbar,
+.custom-navbar-2 {
+    height: 80px;
+    padding: 0 2rem;
+    box-shadow: 0 4px 20px var(--sombra-suave);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-navbar {
+    background: linear-gradient(135deg, var(--azul-oscuro) 0%, #0f6b94 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.custom-navbar-2 {
+    background: linear-gradient(135deg, var(--naranja) 0%, #d85440 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hover para toda la navbar */
+.custom-navbar:hover,
+.custom-navbar-2:hover {
+    box-shadow: 0 6px 30px var(--sombra-media);
+    transform: translateY(-1px);
+}
+
+/* === MARCA SLIDEX === */
+.custom-navbar .navbar-brand,
+.custom-navbar-2 .navbar-brand {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--blanco);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+}
+
+.custom-navbar .navbar-brand:hover {
+    color: var(--blanco);
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(241, 99, 74, 0.3);
+}
+
+.custom-navbar-2 .navbar-brand:hover {
+    color: var(--blanco);
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(19, 124, 165, 0.3);
+}
+
+/* Logo en navbar-2 */
+.custom-navbar-2 .navbar-brand img {
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.custom-navbar-2 .navbar-brand:hover img {
+    transform: rotate(5deg) scale(1.1);
+}
+
+/* === NAVEGACIÓN === */
+.custom-navbar .nav-link,
+.custom-navbar-2 .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+    margin: 0 0.25rem;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    backdrop-filter: blur(5px);
+}
+
+.custom-navbar-2 .nav-link {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Efecto glassmorphism en hover */
+.custom-navbar .nav-link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 10px;
+    z-index: -1;
+}
+
+.custom-navbar-2 .nav-link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 10px;
+    z-index: -1;
+}
+
+/* Hover states */
+.custom-navbar .nav-link:hover,
+.custom-navbar .nav-link:focus {
+    color: var(--blanco);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(241, 99, 74, 0.4);
+    background: rgba(241, 99, 74, 0.2);
+}
+
+.custom-navbar .nav-link:hover::before,
+.custom-navbar .nav-link:focus::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.custom-navbar-2 .nav-link:hover,
+.custom-navbar-2 .nav-link:focus {
+    color: var(--blanco);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(19, 124, 165, 0.4);
+    background: rgba(19, 124, 165, 0.2);
+}
+
+.custom-navbar-2 .nav-link:hover::before,
+.custom-navbar-2 .nav-link:focus::before {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* === BOTONES DE AUTENTICACIÓN === */
+.custom-navbar .nav-item.auth .nav-link,
+.custom-navbar-2 .nav-item.auth .nav-link {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    margin: 0 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.custom-navbar .nav-item.auth .nav-link:hover {
+    background: var(--naranja);
+    border-color: var(--naranja);
+    color: var(--blanco);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(241, 99, 74, 0.5);
+}
+
+.custom-navbar-2 .nav-item.auth .nav-link:hover {
+    background: var(--azul-oscuro);
+    border-color: var(--azul-oscuro);
+    color: var(--blanco);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(19, 124, 165, 0.5);
+}
+
+/* === BOTÓN HAMBURGUESA === */
+.custom-navbar .navbar-toggler,
+.custom-navbar-2 .navbar-toggler {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 0.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-navbar .navbar-toggler:hover,
+.custom-navbar-2 .navbar-toggler:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px var(--sombra-media);
+}
+
+.custom-navbar .navbar-toggler:focus,
+.custom-navbar-2 .navbar-toggler:focus {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+/* Iconos del toggler */
+.custom-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255,255,255,0.9)' stroke-width='2.5' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    transition: all 0.3s ease;
+}
+
+.custom-navbar-2 .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255,255,255,0.9)' stroke-width='2.5' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    transition: all 0.3s ease;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 991px) {
+
+    .custom-navbar,
+    .custom-navbar-2 {
+        height: auto;
+        min-height: 70px;
+        padding: 1rem 1.5rem;
+    }
+
+    .custom-navbar .navbar-collapse,
+    .custom-navbar-2 .navbar-collapse {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        margin-top: 1rem;
+        padding: 1rem;
+    }
+
+    .custom-navbar .nav-link,
+    .custom-navbar-2 .nav-link {
+        margin: 0.25rem 0;
+        padding: 0.8rem 1rem;
+    }
+
+    .custom-navbar .nav-item.auth .nav-link,
+    .custom-navbar-2 .nav-item.auth .nav-link {
+        margin: 0.5rem 0;
+    }
+}
+
+/* === ANIMACIONES ADICIONALES === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.custom-navbar .navbar-nav,
+.custom-navbar-2 .navbar-nav {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Efecto ripple en clicks */
+.custom-navbar .nav-link:active,
+.custom-navbar-2 .nav-link:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+/* === ICONOS === */
+.custom-navbar .nav-link i,
+.custom-navbar-2 .nav-link i {
+    transition: all 0.3s ease;
+}
+
+.custom-navbar .nav-link:hover i,
+.custom-navbar-2 .nav-link:hover i {
+    transform: scale(1.1);
+}
+
+/* Efecto especial para el ícono de logout */
+.custom-navbar .nav-link[href="#/landing"]:hover i,
+.custom-navbar-2 .nav-link[href="#/landing"]:hover i {
+    transform: translateX(3px);
+}
+
+/* === SCROLLED STATE === */
+.custom-navbar.scrolled,
+.custom-navbar-2.scrolled {
+    height: 65px;
+    box-shadow: 0 2px 20px var(--sombra-media);
+}
+
+.custom-navbar.scrolled .navbar-brand,
+.custom-navbar-2.scrolled .navbar-brand {
+    font-size: 1.6rem;
+}
+
+/* === ACCESSIBILIDAD === */
+.custom-navbar .nav-link:focus,
+.custom-navbar-2 .nav-link:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.7);
+    outline-offset: 2px;
+}
+
+/* === MICROINTERACCIONES === */
+.custom-navbar .navbar-brand i,
+.custom-navbar-2 .navbar-brand i {
+    transition: all 0.3s ease;
+}
+
+.custom-navbar .navbar-brand:hover i,
+.custom-navbar-2 .navbar-brand:hover i {
+    transform: rotate(15deg);
+}

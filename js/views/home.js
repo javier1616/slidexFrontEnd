@@ -1,20 +1,57 @@
-import Navbar from '../../components/navbar.js';
-import { getPresentations } from '../api.js';
+import Navbar from '../../components/navbar_auth.js';
 
 export default async () => {
+  return `
+    ${Navbar()}
+    <main class="page-center-wrapper slidex-home-container slidex-gradient-bg">
 
-  const sessions = await getPresentations(1);
+      <!-- HERO -->
+      <section class="slidex-section home-hero text-center">
+        <div class="home-hero-content slidex-fade-in p-5">
+          <h1 class="slidex-border-underline">
+            <span class="slidex-text-gradient-dark slidex-text-shadow">BIENVENIDO A <span>SLIDEX</span></span>
+          </h1>
+          <p class="slidex-subtitle">
+            ¡Comenzá ahora a crear y compartir tus presentaciones en tiempo real!
+          </p>
+        </div>
+      </section>
 
-  console.log(sessions) 
-    
-    return `
-      ${Navbar()}
-      <div class="container">
-        <h2>Home</h2>
-        <p>Para que funcione el get hay que tener cargada una presentacion con id 1, tambien hay que ejecutar el servicio de presentacion, que tiene que tener habilitados los CORS</p>
-        <p>Si apretan F12 y van a console ahí esta el json con lo que trae del microservicio</p>
-        <a href="#/other" class="btn btn-primary">Ir a otraVista</a>
-      </div>
-    `;
+      <!-- FEATURES -->
+      <section class="slidex-home-features slidex-fade-in">
+        <div class="slidex-feature-card slidex-tilt">
+          <i class="bi bi-easel-fill slidex-feature-icon"></i>
+          <h3 class="slidex-feature-title">Crea Presentaciones</h3>
+          <p class="slidex-feature-desc">
+            Diseñá tus presentaciones directamente en la plataforma, sin software externo.
+          </p>
+        </div>
 
-}
+        <div class="slidex-feature-card slidex-tilt">
+          <i class="bi bi-broadcast-pin slidex-feature-icon"></i>
+          <h3 class="slidex-feature-title">Transmití en Vivo</h3>
+          <p class="slidex-feature-desc">
+            Mostrá tu presentación en tiempo real a tu audiencia, sin complicaciones.
+          </p>
+        </div>
+
+        <div class="slidex-feature-card slidex-tilt">
+          <i class="bi bi-chat-dots-fill slidex-feature-icon"></i>
+          <h3 class="slidex-feature-title">Interacción en Tiempo Real</h3>
+          <p class="slidex-feature-desc">
+            Permití que tu audiencia participe con encuestas, preguntas y votaciones.
+          </p>
+        </div>
+      </section>
+
+      <!-- CTA FINAL -->
+      <section class="slidex-section text-center slidex-fade-in p-5">
+        <h2 class="slidex-subtitle mb-4">Creá tu primera presentación</h2>
+        <a href="#/presentations/create" class="slidex-cta-btn slidex-button-bounce">
+          CREAR
+        </a>
+      </section>
+
+    </main>
+  `;
+};

@@ -1,0 +1,298 @@
+/* === ANIMACIONES DE ENTRADA === */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInBottom {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* === EFECTOS CONTINUOS === */
+@keyframes floatLoop {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes pulseLoop {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* === ENTRADAS === */
+.slidex-enter-left {
+    opacity: 0;
+    animation: slideInLeft 0.8s ease forwards;
+}
+
+.slidex-enter-right {
+    opacity: 0;
+    animation: slideInRight 0.8s ease forwards;
+}
+
+.slidex-enter-bottom {
+    opacity: 0;
+    animation: slideInBottom 0.8s ease forwards;
+}
+
+.slidex-fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+.slidex-scale-in {
+    opacity: 0;
+    animation: scaleIn 0.6s ease-out forwards;
+}
+
+/* === EFECTOS CONTINUOS === */
+.slidex-float-loop {
+    animation: floatLoop 3s ease-in-out infinite;
+}
+
+.slidex-pulse-loop {
+    animation: pulseLoop 2s ease-in-out infinite;
+}
+
+/* === EFECTOS DE HOVER === */
+.slidex-float:hover {
+    transform: translateY(-10px);
+    transition: transform 0.3s ease;
+}
+
+.slidex-pulse:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+.slidex-glow:hover {
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.4);
+    transition: box-shadow 0.3s ease;
+}
+
+.slidex-tilt:hover {
+    transform: perspective(600px) rotateX(5deg) rotateY(5deg);
+    transition: transform 0.3s ease;
+}
+
+/* === BOTONES === */
+.slidex-button-bounce {
+    transition: transform 0.2s ease;
+}
+
+.slidex-button-bounce:hover {
+    transform: translateY(-3px);
+}
+
+.slidex-button-bounce:active {
+    transform: scale(0.95);
+}
+
+/* === TEXTO === */
+.slidex-text-gradient {
+    background: linear-gradient(135deg, #007bff, #ff6600);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 5s ease infinite;
+
+    /* NUEVAS PROPIEDADES */
+    font-size: 3rem;
+    /* Tamaño de fuente más grande */
+    font-weight: 700;
+    /* Negrita */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.068);
+    /* Sombra de texto */
+}
+
+
+.slidex-text-shadow {
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.151);
+}
+
+/* === SECCIONES / CONTENEDORES === */
+.slidex-section {
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* === FONDOS === */
+.slidex-gradient-bg {
+    background: linear-gradient(-45deg, #0057b381, #007bff7c, #ff660060, #ffaa333a);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+    color: white;
+    padding: 2rem;
+}
+
+
+.slidex-text-gradient-light {
+    background: linear-gradient(135deg, #66aaff, #ffbb88);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 5s ease infinite;
+}
+
+.slidex-text-gradient-dark {
+    background: linear-gradient(135deg, #2f72f0, #0a0400);
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 5s ease infinite;
+}
+
+/* Keyframes para animar el borde inferior */
+@keyframes borderGrow {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+/* Clase para el contenedor que muestra el borde inferior animado */
+.slidex-border-underline {
+    position: relative;
+    /* necesario para el pseudo-elemento */
+    padding-bottom: 6px;
+    /* espacio para el borde */
+}
+
+.slidex-border-underline::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    /* grosor del borde */
+    background-color: #007bff;
+    /* color del borde (puedes cambiarlo) */
+    width: 0;
+    animation: borderGrow 0.8s ease forwards;
+    border-radius: 2px;
+}
+
+.loading-overlay {
+    position: absolute;
+    /* Para cubrir el contenedor relativo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35);
+    /* Fondo negro con opacidad */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* Por encima de todo */
+
+    /* Para que se vea bien con bordes redondeados si tiene */
+    border-radius: 0.5rem;
+}
+
+/* Spinner simple con animación */
+
+.loading-overlay::after {
+    content: "";
+    width: 40px;
+    height: 40px;
+    border: 5px solid #ffffffaa;
+    /* borde claro */
+    border-top-color: #007bff;
+    /* color animado (azul SlideX) */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

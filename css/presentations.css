@@ -1,0 +1,234 @@
+/* ===== SlideX palette ===== */
+:root {
+    --sx-primary: #4a90e2;
+    --sx-primary-dark: #3978c2;
+    --sx-gray-100: #f5f7fa;
+    --sx-gray-300: #e0e0e0;
+    --sx-gray-900: #333;
+    --sx-danger: #d9534f;
+    --sx-danger-dark: #c9302c;
+}
+
+/* ===== Contenedor principal ===== */
+.sx-container {
+    background: var(--sx-gray-100);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+}
+
+/* ===== Encabezado ===== */
+.sx-heading {
+    font-weight: 700;
+    color: var(--sx-primary);
+    border-bottom: 2px solid var(--sx-gray-300);
+    padding-bottom: .5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ===== Lista ===== */
+.sx-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* ===== Ítem ===== */
+.sx-item {
+    background: #fff;
+    border: 1px solid var(--sx-gray-300);
+    border-radius: .85rem;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.sx-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .1);
+}
+
+/* Título + contador */
+.sx-item__title {
+    font-size: 1.1rem;
+    color: var(--sx-gray-900);
+}
+
+.sx-badge {
+    background: var(--sx-primary);
+    color: #fff;
+    font-size: .8rem;
+    padding: .35em .7em;
+    border-radius: .5rem;
+    margin-left: .75rem;
+}
+
+/* ===== Botones ===== */
+.sx-buttons .btn {
+    border-radius: .5rem !important;
+    font-weight: 500;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+/* Primario */
+.sx-btn--primary {
+    background: var(--sx-primary);
+    border-color: var(--sx-primary);
+    color: #fff;
+}
+
+.sx-btn--primary:hover {
+    background: var(--sx-primary-dark);
+    border-color: var(--sx-primary-dark);
+}
+
+/* Secundario (Outline) */
+.sx-btn--secondary {
+    background: transparent;
+    border: 1px solid var(--sx-primary);
+    color: var(--sx-primary);
+}
+
+.sx-btn--secondary:hover {
+    background: rgba(74, 144, 226, .08);
+    color: var(--sx-primary-dark);
+    border-color: var(--sx-primary-dark);
+}
+
+/* Danger (Outline) */
+.sx-btn--danger {
+    background: transparent;
+    border: 1px solid var(--sx-danger);
+    color: var(--sx-danger);
+}
+
+.sx-btn--danger:hover {
+    background: rgba(217, 83, 79, .08);
+    color: var(--sx-danger-dark);
+    border-color: var(--sx-danger-dark);
+}
+
+/* ===== Ajustes de layout para no tapar el navbar ===== */
+.sx-container {
+    margin-top: 5rem;
+    /* ↓ separa del navbar (≈ 80 px) */
+    padding-top: 2.5rem;
+    /* ↑ aire interno adicional */
+}
+
+/* ===== Botones más grandes y espaciados ===== */
+.sx-buttons {
+    gap: 0.75rem;
+    /* distancia horizontal entre botones */
+}
+
+.sx-buttons .btn {
+    padding: 0.55rem 1.4rem;
+    /* alto + ancho */
+    font-size: 0.95rem;
+    /* un poco más de texto */
+}
+
+/* Ajustes opcionales por si Bootstrap reduce el gap dentro de btn‑group */
+.sx-buttons .btn:not(:first-child) {
+    margin-left: 0.75rem;
+    /* refuerzo del espaciado */
+}
+
+/* ===== Botonera SlideX (sx-btn) ===== */
+
+.sx-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.sx-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.6rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto fondo animado */
+.sx-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    z-index: 0;
+    opacity: 0.15;
+}
+
+/* Hover = animar fondo */
+.sx-btn:hover::before {
+    transform: scaleX(1);
+}
+
+/* Elevar botón al pasar el mouse */
+.sx-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenido sobre el fondo animado */
+.sx-btn>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* === Variantes === */
+
+/* Primario */
+.sx-btn--primary {
+    background-color: #4A90E2;
+    color: white;
+}
+
+.sx-btn--primary::before {
+    background-color: #ffffff;
+}
+
+/* Secundario (outline) */
+.sx-btn--secondary {
+    background-color: white;
+    color: #4A90E2;
+    border: 2px solid #4A90E2;
+}
+
+.sx-btn--secondary::before {
+    background-color: #4A90E2;
+}
+
+/* Danger */
+.sx-btn--danger {
+    background-color: white;
+    color: #d9534f;
+    border: 2px solid #d9534f;
+}
+
+.sx-btn--danger::before {
+    background-color: #d9534f;
+}
+
+.sx-btn--primary:hover {
+    background-color: #3978c2;
+    border-color: #3978c2;
+    color: white !important;
+}
