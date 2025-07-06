@@ -6,7 +6,7 @@
 //export const API_URL = 'https://localhost:7112/api/v1/'
 
 
-export const USER_SERVICE_URL = 'https://european-carpet-optional-washington.trycloudflare.com/'
+export const USER_SERVICE_URL = 'https://prevent-q-albuquerque-mess.trycloudflare.com/'
 
 export const SESSION_SERVICE_URL = 'https://highly-developer-focusing-develop.trycloudflare.com/api/v1/'
 export const SIGNALR_HUB = 'https://highly-developer-focusing-develop.trycloudflare.com/sessionHub/'
