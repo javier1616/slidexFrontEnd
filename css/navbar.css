@@ -318,3 +318,25 @@
 .custom-navbar-2 .navbar-brand:hover i {
     transform: rotate(15deg);
 }
+
+.custom-navbar-2 .navbar-collapse {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.custom-navbar-2 .navbar-nav:first-child {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    /* Para que ocupe todo el espacio posible */
+    gap: 1rem;
+}
+
+.custom-navbar-2 .navbar-nav.ms-auto {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    flex-grow: 0;
+}

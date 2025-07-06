@@ -1,18 +1,21 @@
 import Navbar from '../../components/navbar_auth.js';
-import { getPresentationAll } from '../api.js';
+import { getPresentationAll, getPresentationsByUser } from '../api.js';
 
 export default async () => {
   let presentations = [];
 
   try {
-    presentations = await getPresentationAll();
+    const token = localStorage.getItem('access_token');
+    const userId = localStorage.getItem('user_id');
+
+    presentations = await getPresentationsByUser(userId, token);
   } catch (err) {
     console.error('Error al cargar presentaciones:', err);
   }
 
   const listItems = presentations.map((p, i) => {
-    const slideQty  = p.slides?.length ?? 0;
-    const safeTitle = p.title?.trim()  || `Presentación ${i + 1}`;
+    const slideQty = p.slides?.length ?? 0;
+    const safeTitle = p.title?.trim() || `Presentación ${i + 1}`;
 
     return `
       <div class="sx-item">
@@ -26,13 +29,13 @@ export default async () => {
         </div>
 
         <div class="sx-buttons">
-          <a href="#/present/${p.id}" class="sx-btn sx-btn--primary">
+          <button id="present-presentation-${p.id}" data-id="${p.id}" data-action="present" class="sx-btn sx-btn--primary">
             <i class="bi bi-play-fill me-1"></i>Presentar
-          </a>
-          <a href="#/presentations/${p.id}/edit" class="sx-btn sx-btn--secondary">
+          </button>
+          <a href="#/presentations/edit/${p.id}" class="sx-btn sx-btn--secondary">
             <i class="bi bi-pencil-square me-1"></i>Editar
           </a>
-          <button data-id="${p.id}" data-action="delete" class="sx-btn sx-btn--danger">
+          <button id="delete-presentation-${p.id}" data-id="${p.id}" data-action="delete" class="sx-btn sx-btn--danger">
             <i class="bi bi-trash3 me-1"></i>Eliminar
           </button>
         </div>

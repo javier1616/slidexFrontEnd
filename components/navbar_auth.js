@@ -24,7 +24,7 @@ export default () => {
 
           <li class="nav-item">
             <a class="nav-link" href="#/joinsession">
-              <i class="bi bi-people-fill me-2"></i>Crear / Unirse a sesión
+              <i class="bi bi-people-fill me-2"></i>Unirse a sesión
             </a>
           </li>
 

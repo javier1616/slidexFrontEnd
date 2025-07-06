@@ -1,5 +1,5 @@
 import router from './router.js';
-import { createParticipant, getSessionByAccessCode, loginUser, getPresentation, registerUser, recoverPassword } from './api.js'
+import { createParticipant, getSessionByAccessCode, loginUser, getPresentationById, registerUser, recoverPassword, deletePresentationBackend } from './api.js'
 import { startSignalRConnection, joinSessionGroup } from './SignalR/Manager.js';
 import { startSessionHandler, iniciarSignalR } from './Services/SignalR/signalR.js';
 import { joinSessionHandler } from './Services/SessionServices/joinSession.js';
@@ -18,8 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('slidex_initialized', '1'); // 2) deja el flag
     }
     */
-   
+
     router();
+
+
 
 
     //delegacion de evento 'click' (carga el addEventListener para click para todo el DOM)
@@ -30,30 +32,40 @@ document.addEventListener('DOMContentLoaded', () => {
             resetStorage();
         }
 
+        // ELIMINAR PRESENTACIÓN
+        if (event.target.closest('button[data-action="delete"]')) {
+            const deleteBtn = event.target.closest('button[data-action="delete"]');
+            if (deleteBtn) {
+                const confirmed = confirm("¿Estás seguro de que querés eliminar esta presentación?");
+                if (!confirmed) return;
 
-        //Descomentar para debug
-        console.log("click");
-        console.log(event.target);
+                const id = deleteBtn.dataset.id;
+                const token = localStorage.getItem("access_token");
 
-        //click en elemento exacto  -->  if (event.target.matches("#join-session-btn")) { ...  }
-        //click en algun hijo dentro de ese elemento --> if (event.target.closest('idDelElemento')) { ... }
+                try {
+                    await deletePresentationBackend(id, token); // ← función que llama a tu API
+                    alert("✅ Presentación eliminada correctamente.");
 
-        //Presenter
-        /*if (event.target.matches("#create-session-btn")) {
+                    // Opcional: recargar o redirigir
+                    location.reload(); // o router.navigate("/#/home") si usás rutas hash
+                } catch (err) {
+                    console.error(err);
+                    alert("❌ Error al eliminar la presentación.");
+                }
+            }
+        }
 
-            //alert("este seria para crear la sesion el codigo y que se conecte en otro momento...");
+        //PRESENTAR
+        if (event.target.closest('button[data-action="present"]')) {
+            const presentBtn = event.target.closest('button[data-action="present"]');
+            if (presentBtn) {
+                const confirmed = confirm("¿Estás seguro de que querés presentar?");
+                if (!confirmed) return;
+            }
 
-            var sessioncode = "ABC123"
-
-            location.hash = `#/active/presenter/${sessioncode}`;
-
-        }*/
-
-        //Presenter (start_btn)
-        if (event.target.matches("#start-session-btn")) {
-
+            const id = presentBtn.dataset.id;
             //se crea la sesión
-            await startSessionHandler();
+            await startSessionHandler(id);
 
             console.log("renderizando vista de presentacion (presentador)");
 
@@ -121,19 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         //qrModal
-        if (event.target.closest('#share-links-modal-btn')) {
+        if (event.target.matches('#btn_shareLink')) {
 
-            var sessionCode = document.getElementById('sessionCodeSpan').textContent;
+            alert("Mostrando modal con QRcode");
 
-            var qrModalContainer = document.getElementById("modal");
+            var link_url = 'https://www.google.com' //(luego modificar)
 
-            var link_url = `http://127.0.0.1:3000/index.html#/login?session=${sessionCode}`;
-
-            var qrModalObject = qrModal(link_url);            
-
-            qrModalContainer.innerHTML = qrModalObject;
-
-            //qrContainer es el id de un elemento dentro del componente qrModal
+            /*
             new QRCode(qrContainer, {    // aca pone el qr
                 text: link_url,
                 width: 128,
@@ -142,16 +148,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 colorLight: "#ffffff",    //podes cambiarlo
                 correctLevel: QRCode.CorrectLevel.H   //no se que hace, ver 
             });
-
-            var modal = new bootstrap.Modal(document.getElementById('shareLinksModal'));
-            modal.show();
-
-           
-            /*
-            
-
+ 
             console.log("qrContainer: ", qrContainer);
             */
+
+            const qrModalContainer = document.getElementById("modal");
+            var qrContainer = `<h1>Aqui va el  QR Code</h1>`;
+            qrModalContainer.innerHTML = qrModal(link_url, qrContainer);
 
         }
 
@@ -238,40 +241,8 @@ document.addEventListener('submit', async (event) => {
             localStorage.setItem('token_type', token_type);
             localStorage.setItem('user_id', user_id);
 
-
-            //Si se loguea desde QR / url con sessionCode redirecciona
-            //como participante a una conexion con esa session
-            //sino va directo a su home
-
-            console.log("verificando si se loguea con accesscode")
-            
-            const session = sessionStorage.getItem("joinSession");
-            console.log("joinSession");
-            console.log(session);
-
-            if (session == null)
-            {
-                // Redirección al home del usuario
-                location.hash = '#/presentations';
-            }
-            else
-            {
-                console.log("se loguea desde link compartido... uniendose a la session");
-                // Inicio sesion como participante con ese codigo de session
-
-                //dispara los mismos eventos que si presionas el boton join-session-btn
-                //no puedo enviar el evento click porque hace un getElementById de algo
-                //que no existe porque estoy en la pagina de login
-
-                localStorage.setItem("accessCode", session); 
-                location.hash = `#/active/participant/${session}`;
-                await joinSessionHandler();
-
-            }
-
-            //location.hash = '#/presentations';
-
-
+            // Redirección a /SesionIniciada
+            location.hash = '#/presentations';
         } catch (error) {
             alert('Error al loguearse ', error);
         } finally {

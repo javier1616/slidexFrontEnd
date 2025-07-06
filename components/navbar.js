@@ -15,7 +15,7 @@ export default () => {
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="#/about">
-            <i class="bi bi-info-circle-fill"></i> Sobre Nosotros
+            <i class="bi bi-info-circle-fill"></i> Primeros pasos
           </a>
         </li>
       </ul>

@@ -128,9 +128,9 @@ export async function joinSessionHandler() {
                     // }
             
                     alert("Recibiendo respuesta - ESTOY EN PARTICIPANTE")
-                    
-                    console.log("respuesta: ",slideStats);
-                    
+
+                    console.log("respuesta desde PARTICIPANTE: ",slideStats);
+
             });
  
 

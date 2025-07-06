@@ -1,6 +1,6 @@
 import { USER_SERVICE_URL } from '../data/config.js';
 import { SESSION_SERVICE_URL } from '../data/config.js';
-import {PRESENTATION_SERVICE_URL} from '../data/config.js';
+import { PRESENTATION_SERVICE_URL } from '../data/config.js';
 
 export async function loginUser(email, password) {
   try {
@@ -96,7 +96,7 @@ export async function createParticipant(user, session, token) {
 }
 
 
-export async function getPresentation(presentationId, token) {
+export async function getPresentationById(presentationId, token) {
   try {
 
     const url = `${PRESENTATION_SERVICE_URL}Presentation/GetById/${presentationId}`;
@@ -112,7 +112,7 @@ export async function getPresentation(presentationId, token) {
     const data = await response.json();
 
     if (response.ok) {
-      console.log('Presentación encontrada: ',data);
+      console.log('Presentación encontrada: ', data);
       return data;
     }
 
@@ -143,7 +143,7 @@ export async function getPresentationAll(token) {
     const data = await response.json();
 
     if (response.ok) {
-      console.log('Presentaciones encontradas: ',data);
+      console.log('Presentaciones encontradas: ', data);
       return data;
     }
 
@@ -156,6 +156,38 @@ export async function getPresentationAll(token) {
     throw error;
   }
 }
+
+
+export async function getPresentationsByUser(userId, token) {
+  try {
+
+    const url = `${PRESENTATION_SERVICE_URL}Presentation/GetUserPresentations/${userId}`;
+
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log('Presentaciones encontradas: ', data);
+      return data;
+    }
+
+    const error = new Error(data.message || 'Error');
+    error.status = response.status;
+    throw error;
+
+  } catch (error) {
+    console.error('Error al obtener todas las presentaciones:', error);
+    throw error;
+  }
+}
+
 
 export async function createPresentationBackend(data, token) {
   try {
@@ -187,6 +219,77 @@ export async function createPresentationBackend(data, token) {
     throw error;
   }
 }
+
+export async function updatePresentationBackend(data, token) {
+  try {
+    const url = `${PRESENTATION_SERVICE_URL}presentation/update/${data.id}`;
+
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    console.log("datos de respuesta del backend");
+    console.log(result);
+
+    if (!response.ok) {
+      const error = new Error(result.message || 'Error al crear presentación');
+      error.status = response.status;
+      throw error;
+    }
+
+    return result;
+
+  } catch (error) {
+    console.error('Error al modificar la presentación:', error);
+    throw error;
+  }
+}
+
+
+export async function deletePresentationBackend(id, token) {
+  try {
+    const url = `${PRESENTATION_SERVICE_URL}presentation/delete/${id}`;
+
+    console.log(url);
+
+
+    const response = await fetch(url, {
+      method: 'DELETE', 
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      // Intentar parsear JSON solo si hay contenido
+      let errorMessage = 'Error al eliminar la presentación';
+      try {
+        const result = await response.json();
+        errorMessage = result.message || errorMessage;
+      } catch {
+        // No hay JSON, dejamos mensaje por defecto
+      }
+      const error = new Error(errorMessage);
+      error.status = response.status;
+      throw error;
+    }
+    // O simplemente retornar true si todo OK:
+    console.log('Presentación ' + id + ' eliminada con éxito');
+    return true;
+
+  } catch (error) {
+    console.error('Error al eliminar la presentación:', error);
+    throw error;
+  }
+}
+
 
 
 export async function createSlide(data) {

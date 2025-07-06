@@ -14,10 +14,6 @@ export default async () => {
         <span id="sessionStatusSpan" class="text-danger fw-bold">Not Connected</span>
         <span>Session code:</span>
         <span id="sessionCodeSpan" class="text-danger fw-bold"></span>
-        <button id="share-links-modal-btn" type="button" class="not-raised" title="Compartir enlaces">
-            <i class="bi bi-link-45deg fs-1"></i>
-            <i class="bi bi-qr-code fs-1"></i>
-          </button>
       </div>
 
       <!-- Zona principal -->
@@ -60,6 +56,10 @@ export default async () => {
 
         <button id="btn_next" class="btn-slide-nav">
           Siguiente <i class="bi bi-arrow-right-circle-fill"></i>
+        </button>
+
+        <button id="btn_end_session" class="btn-slide-nav">
+          <i class="bi bi-arrow-left-circle-fill"></i> CERRAR SESION
         </button>
 
         <button id="btn_last" class="btn btn-secondary d-none" disabled>

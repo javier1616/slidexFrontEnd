@@ -18,8 +18,8 @@ export default async () => {
       </section>
 
       <!-- FEATURES -->
-      <section class="slidex-home-features slidex-fade-in">
-        <div class="slidex-feature-card slidex-tilt">
+      <section class="slidex-home-features slidex-fade-in ">
+        <div class="slidex-feature-card slidex-tilt slidex-float-loop">
           <i class="bi bi-easel-fill slidex-feature-icon"></i>
           <h3 class="slidex-feature-title">Crea Presentaciones</h3>
           <p class="slidex-feature-desc">
@@ -27,7 +27,7 @@ export default async () => {
           </p>
         </div>
 
-        <div class="slidex-feature-card slidex-tilt">
+        <div class="slidex-feature-card slidex-tilt slidex-float-loop">
           <i class="bi bi-broadcast-pin slidex-feature-icon"></i>
           <h3 class="slidex-feature-title">Transmití en Vivo</h3>
           <p class="slidex-feature-desc">
@@ -35,7 +35,7 @@ export default async () => {
           </p>
         </div>
 
-        <div class="slidex-feature-card slidex-tilt">
+        <div class="slidex-feature-card slidex-tilt slidex-float-loop">
           <i class="bi bi-chat-dots-fill slidex-feature-icon"></i>
           <h3 class="slidex-feature-title">Interacción en Tiempo Real</h3>
           <p class="slidex-feature-desc">
@@ -46,10 +46,7 @@ export default async () => {
 
       <!-- CTA FINAL -->
       <section class="slidex-section text-center slidex-fade-in p-5">
-        <h2 class="slidex-subtitle mb-4">Creá tu primera presentación</h2>
-        <a href="#/presentations/create" class="slidex-cta-btn slidex-button-bounce">
-          CREAR
-        </a>
+        <a href="#/login" class="slidex-cta-btn slidex-cta-strong slidex-cta-animate">Creá tu primera presentación</a>
       </section>
 
     </main>

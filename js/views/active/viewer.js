@@ -14,20 +14,23 @@ export default async (sessionCode) => {
         <span id="sessionCodeSpan" class="text-danger fw-bold">${sessionCode ?? "-"}</span>
       </div>
 
-      <!-- Slide + botón levantar mano -->
-      <div class="row flex-grow-1 m-0 g-2">
-        
-        <div id="slide-container" class="col-11 p-0 d-flex flex-column border rounded shadow-sm bg-white overflow-hidden">
-          <!-- contenido dinámico aquí -->
+      <!-- Zona principal -->
+      <div class="row flex-grow-1 g-2 m-0">
+
+        <!-- Contenedor del slide -->
+        <div id="slide-container" class="col-12 col-lg-10 d-flex flex-column h-100 overflow-hidden p-0 border rounded bg-white shadow-sm mb-2">
+          
         </div>
 
-        <div class="col-1 d-flex flex-column justify-content-start align-items-center p-3">
-          <button id="raise-hand-btn" type="button" class="not-raised" title="Levantar mano">
-            <i class="bi bi-person-raised-hand fs-1"></i>
+        <!-- Botón levantar mano -->
+        <div class="col-12 col-lg-2 d-flex flex-column align-items-center justify-content-start p-3">
+          <button id="raise-hand-btn" type="button" class="not-raised sx-btn sx-btn--primary" title="Levantar mano">
+            <i class="bi bi-person-raised-hand fs-3"></i>
           </button>
         </div>
 
       </div>
+
     </div>
   `;
 };

@@ -107,13 +107,24 @@ export default () =>{
 
 async function changeSlide(connection,sessionId,slideIndex,slide){
 
+    // Determinar si el slide tiene pregunta
+    const hasQuestion = slide.ask;
+    // Busco la respuesta correcta y las opciones
+    let answerCorrect = null;
+    let options = null;
+    if (hasQuestion) {
+        const correctOption = slide.ask.options.find(opt => opt.isCorrect);
+        answerCorrect = correctOption ? correctOption.optionText : null;
+        options = slide.ask.options.map(opt => opt.optionText);
+    }
+
     const slideRequest = {
         sessionId : sessionId,
         slideIndex: slideIndex,
-        slideId : slide.slideId,
-        ask : null, 
-        answerCorrect : null,
-        options : null
+        slideId : slide.idSlide,
+        ask: hasQuestion ? slide.ask.askText : null,
+        answerCorrect: hasQuestion ? answerCorrect : null,
+        options: hasQuestion ? options : null
     }
 
     console.log("slideRequest: ", slideRequest);
