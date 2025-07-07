@@ -39,7 +39,7 @@ const parseLocation = () => location.hash.slice(1).toLowerCase() || "/";
 const router = async () => {
   console.log("Iniciando router.js");
 
-  const path = parseLocation();
+  var path = parseLocation();
   var render;
 
   // 1-B: /presentations/edit/:id
@@ -103,7 +103,7 @@ const router = async () => {
       console.log("parametro detectado: ", queryString);
 
       sessionStorage.setItem("joinSession", queryString.split("=")[1]);
-      
+
       //redirecciona a login cuando sale del if
       console.log(path);
       path = `/login`;
