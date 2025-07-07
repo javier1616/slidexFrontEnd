@@ -101,9 +101,11 @@ const router = async () => {
 
     if (queryString) {
       console.log("parametro detectado: ", queryString);
-      sessionStorage.setItem("joinSession", queryString.split("=")[1]);
 
+      sessionStorage.setItem("joinSession", queryString.split("=")[1]);
+      
       //redirecciona a login cuando sale del if
+      console.log(path);
       path = `/login`;
     }
 
