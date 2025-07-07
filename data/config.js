@@ -30,5 +30,5 @@ export const API_URL = `https://${PRESENTATION_MS_TUNNEL}.trycloudflare.com/api/
 export const SESSION_SERVICE_URL = `https://${SESSION_MS_TUNNEL}.trycloudflare.com/api/v1/`
 export const SIGNALR_HUB = `https://${SESSION_MS_TUNNEL}.trycloudflare.com/sessionHub/`
 
-export const HISTORY_SERVICE_URL = `https://${HISTORY_MS_TUNNEL}.trycloudflare.com/api/History/`
+export const HISTORY_SERVICE_URL = `https://${HISTORY_MS_TUNNEL}.trycloudflare.com/api`
 
