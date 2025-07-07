@@ -32,5 +32,3 @@ export const SIGNALR_HUB = `https://${SESSION_MS_TUNNEL}.trycloudflare.com/sessi
 
 export const HISTORY_SERVICE_URL = `https://${HISTORY_MS_TUNNEL}.trycloudflare.com/api`
 
-export const LOGO_URL='https://i.ibb.co/5xTzvQ9G/favicon.png'
-
