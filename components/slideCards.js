@@ -52,63 +52,63 @@ export function pintarSlide(slide, role) {
 function slideConPreguntaPresentador(slide) {
   return `
     <div class="presenter-wrapper">
-      <h4 class="text-center text-primary fw-bold mb-4">${slide.title ?? "Sin título"}</h4>
-      <h6 class="text-center text-primary fw-bold mb-4">${slide.content ?? 'Sin subtitulo'}</h6>
+      <!-- Encabezado con título, contador y subtítulo -->
+      <div class="slide-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <h4 class="slide-title">${slide.title ?? "Sin título"}</h4>
+          <span class="slide-count">Slide N° ${slide.position ?? 1}</span>
+        </div>
+        <h6 class="slide-subtitle mt-2 mb-0">
+          ${slide.content ?? "Sin subtítulo"}
+        </h6>
+      </div>
 
       <div class="presenter-content">
-        <div class="presenter-image" style="background-color: ${slide.backgroundColor ?? '#fff'};">
+        <!-- Imagen o placeholder -->
+        <div class="presenter-image" style="background-color:${slide.backgroundColor ?? "#fff"};">
           ${slide.url
-            ? `<img src="${slide.url}" alt="Slide Image" class="presenter-image-img">`
-            : `<div class="text-muted text-center">Sin imagen</div>`
-          }
+      ? `<img src="${slide.url}" alt="Slide Image" class="presenter-image-img">`
+      : `<div class="text-muted text-center">Sin imagen</div>`
+    }
         </div>
+
+        <!-- Panel de pregunta -->
         <div class="presenter-question">
           <h6 class="presenter-question-title">${slide.ask?.name ?? "Sin pregunta"}</h6>
           <p class="presenter-question-description">${slide.ask?.description ?? ""}</p>
           <p class="presenter-question-text">${slide.ask?.askText ?? ""}</p>
 
           ${slide.ask?.options?.length
-            ? slide.ask.options.map(o => `
+      ? slide.ask.options
+        .map(
+          (o) => `
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="option-${o.idOption}" disabled>
                 <label class="form-check-label" for="option-${o.idOption}">
                   ${o.optionText ?? ""}
                 </label>
-              </div>`).join("")
-            : `<p class="text-muted">No hay opciones disponibles</p>`
-          }
+              </div>`
+        )
+        .join("")
+      : `<p class="text-muted">No hay opciones disponibles</p>`
+    }
+
           <div id="stats-presenter" class="alert alert-info mt-3" style="display:none;"></div>
         </div>
       </div>
-
-      <ul class="list-group list-group-horizontal-md mt-4 flex-wrap justify-content-center small">
-        <li class="list-group-item"><strong>IdSlide:</strong> ${slide.idSlide}</li>
-        <li class="list-group-item"><strong>Posición:</strong> ${slide.position}</li>
-        <li class="list-group-item"><strong>Creado:</strong> ${slide.createAt ? new Date(slide.createAt).toLocaleString() : "N/A"}</li>
-        <li class="list-group-item"><strong>Modificado:</strong> ${slide.modifiedAt ? new Date(slide.modifiedAt).toLocaleString() : "N/A"}</li>
-        <li class="list-group-item"><strong>IdContentType:</strong> ${slide.idContentType ?? "N/A"}</li>
-        <li class="list-group-item"><strong>IdAsk:</strong> ${slide.ask?.idAsk ?? "N/A"}</li>
-        <li class="list-group-item"><strong>IdPresentation:</strong> ${slide.idPresentation ?? "N/A"}</li>
-      </ul>
     </div>
   `;
 }
 
 
 function slideConPreguntaParticipante(slide) {
-  /* ----------------------------------------------------------------
-   * 1) ¿Este slide ya fue respondido?
-   * ---------------------------------------------------------------- */
   const isAnswered = getAnsweredSlides().includes(slide.idSlide);
 
-  /* ----------------------------------------------------------------
-   * 2) Render HTML
-   * ---------------------------------------------------------------- */
   return `
-    <div class="row flex-grow-1 g-2 m-0">
+    <div class="slide-main">
 
-      <!-- Contenido principal ------------------------------------------------>
-      <div class="col-12 col-lg-10 d-flex flex-column h-100 overflow-hidden p-0 border rounded bg-white shadow-sm">
+      <!-- Slide principal -->
+      <div class="slide-content">
         <div class="card-header text-center p-4">
           <h5 class="text-primary fw-bold mb-2">${slide.title ?? 'Sin título'}</h5>
           <h6 class="text-primary fw-semibold">${slide.content ?? 'Sin subtitulo'}</h6>
@@ -118,35 +118,37 @@ function slideConPreguntaParticipante(slide) {
              style="background-color: ${slide.backgroundColor ?? '#fff'};">
           ${slide.url
             ? `<img src="${slide.url}" alt="Slide Image" class="participant-image-img">`
-            : `<div class="text-muted text-center w-100">Sin imagen</div>`
-          }
+            : `<div class="text-muted text-center w-100">Sin imagen</div>`}
         </div>
       </div>
 
-      <!-- Pregunta y respuesta ---------------------------------------------->
-      <div class="col-12 col-lg-2 d-flex flex-column justify-content-start p-3 participant-question">
+      <!-- Zona de pregunta -->
+      <div class="participant-question p-3">
         <h6 class="fw-bold text-primary">${slide.ask?.name ?? 'Sin pregunta'}</h6>
         <p class="text-muted mb-1">${slide.ask?.description ?? ''}</p>
         <p class="fw-semibold">${slide.ask?.askText ?? ''}</p>
 
-        <!-- Opciones ---------------------------------------------------------->
         ${slide.ask?.options?.length
           ? slide.ask.options.map(o => `
               <div class="form-check">
                 <input class="form-check-input"
                        type="checkbox"
+                       name="ask-options-${slide.idSlide}"
                        id="option-${slide.idSlide}-${o.idOption}"
                        value="${o.idOption}"
-                       ${isAnswered ? 'disabled' : ''}>
+                       ${isAnswered ? 'disabled' : ''}
+                       onchange="
+                         document.querySelectorAll('input[name=\\'ask-options-${slide.idSlide}\\']').forEach(cb => {
+                           if (cb !== this) cb.checked = false;
+                         });
+                       ">
                 <label class="form-check-label" for="option-${slide.idSlide}-${o.idOption}">
                   ${o.optionText ?? ''}
                 </label>
               </div>
             `).join('')
-          : `<p class="text-muted">No hay opciones disponibles</p>`
-        }
+          : `<p class="text-muted">No hay opciones disponibles</p>`}
 
-        <!-- Botón Guardar --------------------------------------------------->
         <div class="text-end mt-3">
           <button id="btn-save-ask-${slide.idSlide}"
                   data-id-slide="${slide.idSlide}"
@@ -156,6 +158,7 @@ function slideConPreguntaParticipante(slide) {
           </button>
         </div>
       </div>
+
     </div>
   `;
 }
@@ -164,53 +167,55 @@ function slideConPreguntaParticipante(slide) {
 function slideSinPreguntaPresentador(slide) {
   return `
     <div class="presenter-wrapper">
-      <h4 class="text-center text-primary fw-bold mb-4">${slide.title ?? 'Sin título'}</h4>
-      <h6 class="text-center text-primary fw-bold mb-4">${slide.content ?? 'Sin subtitulo'}</h6>
+     
+      <div class="slide-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+        <h4 class="slide-title">${slide.title ?? 'Sin título'}</h4>
+        <span class="slide-count">Slide N° ${slide.position ?? 1}</span>
+      </div>
+      <h6 class="slide-subtitle mt-2 mb-0">${slide.content ?? 'Sin subtítulo'}</h6>
+    </div>
 
       <div class="presenter-content">
         <div class="presenter-image" style="background-color: ${slide.backgroundColor ?? '#fff'};">
           ${slide.url
-            ? `<img src="${slide.url}" alt="Slide Image" class="presenter-image-img">`
-            : `<div class="text-muted text-center">Sin imagen</div>`
-          }
+      ? `<img src="${slide.url}" alt="Slide Image" class="presenter-image-img">`
+      : `<div class="text-muted text-center">Sin imagen</div>`
+    }
         </div>
       </div>
 
-      <ul class="list-group list-group-horizontal-md mt-4 flex-wrap justify-content-center small">
-        <li class="list-group-item"><strong>Posición:</strong> ${slide.position}</li>
-        <li class="list-group-item"><strong>Creado:</strong> ${slide.createAt ? new Date(slide.createAt).toLocaleString() : 'N/A'}</li>
-        <li class="list-group-item"><strong>Modificado:</strong> ${slide.modifiedAt ? new Date(slide.modifiedAt).toLocaleString() : 'N/A'}</li>
-      </ul>
     </div>
   `;
 }
 
+
 function slideSinPreguntaParticipante(slide) {
   return `
-    <div class="row flex-grow-1 g-2 m-0">
+    <div class="slide-main">
 
-      <!-- Contenido principal -->
-      <div class="col-12 col-lg-10 d-flex flex-column h-100 overflow-hidden p-0 border rounded bg-white shadow-sm">
+      <!-- Slide principal -->
+      <div class="slide-content">
         <div class="card-header text-center p-4">
           <h5 class="text-primary fw-bold mb-2">${slide.title ?? 'Sin título'}</h5>
           <h6 class="text-primary fw-semibold">${slide.content ?? 'Sin subtitulo'}</h6>
         </div>
         <div class="participant-image flex-grow-1 d-flex align-items-center justify-content-center" style="background-color: ${slide.backgroundColor ?? '#fff'};">
           ${slide.url
-            ? `<img src="${slide.url}" alt="Slide Image" class="participant-image-img">`
-            : `<div class="text-muted text-center w-100">Sin imagen</div>`}
+      ? `<img src="${slide.url}" alt="Slide Image" class="participant-image-img">`
+      : `<div class="text-muted text-center w-100">Sin imagen</div>`}
         </div>
       </div>
 
-      <!-- Lateral vacío o levantar mano si querés -->
-      <div class="col-12 col-lg-2 d-flex flex-column align-items-center justify-content-center p-3">
-        <!-- Podés poner algo acá si querés -->
+      <!-- Lateral -->
+      <div class="participant-question d-flex flex-column align-items-center justify-content-center p-3">
         <div class="text-muted">Sin pregunta</div>
       </div>
 
     </div>
   `;
 }
+
 
 
 // Evento delegado para todos los botones "Guardar respuesta"

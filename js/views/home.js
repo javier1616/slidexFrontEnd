@@ -8,7 +8,7 @@ export default async () => {
       <!-- HERO -->
       <section class="slidex-section home-hero text-center">
         <div class="home-hero-content slidex-fade-in p-5">
-          <h1 class="slidex-border-underline">
+          <h1 class="slidex-border-underline display-1">
             <span class="slidex-text-gradient-dark slidex-text-shadow">BIENVENIDO A <span>SLIDEX</span></span>
           </h1>
           <p class="slidex-subtitle">
@@ -46,7 +46,7 @@ export default async () => {
 
       <!-- CTA FINAL -->
       <section class="slidex-section text-center slidex-fade-in p-5">
-        <a href="#/login" class="slidex-cta-btn slidex-cta-strong slidex-cta-animate">Creá tu primera presentación</a>
+        <a href="#/presentations/create" class="slidex-cta-btn slidex-cta-strong slidex-cta-animate">Creá tu primera presentación</a>
       </section>
 
     </main>

@@ -4,10 +4,10 @@ export default async (sessionCode) => {
   return `
     ${Navbar()}
 
-    <div class="slide-wrapper d-flex flex-column overflow-hidden px-3 py-2">
+    <div class="slide-wrapper">
 
       <!-- Estado de sesión -->
-      <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
+      <div class="session-status">
         <span>Status:</span>
         <span id="sessionStatusSpan" class="text-danger fw-bold">Not Connected</span>
         <span>Session code:</span>
@@ -15,15 +15,15 @@ export default async (sessionCode) => {
       </div>
 
       <!-- Zona principal -->
-      <div class="row flex-grow-1 g-2 m-0">
+      <div class="slide-main">
 
         <!-- Contenedor del slide -->
-        <div id="slide-container" class="col-12 col-lg-10 d-flex flex-column h-100 overflow-hidden p-0 border rounded bg-white shadow-sm mb-2">
+        <div id="slide-container" class="slide-container">
           
         </div>
 
         <!-- Botón levantar mano -->
-        <div class="col-12 col-lg-2 d-flex flex-column align-items-center justify-content-start p-3">
+        <div class="raise-hand-zone">
           <button id="raise-hand-btn" type="button" class="not-raised sx-btn sx-btn--primary" title="Levantar mano">
             <i class="bi bi-person-raised-hand fs-3"></i>
           </button>

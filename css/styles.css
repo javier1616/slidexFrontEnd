@@ -7,16 +7,7 @@
   --naranja-claro: #E27662;
 }
 
-body,
-html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, var(--gris-super-claro) 0%, #c9e7f3 100%);
-  color: var(--azul-oscuro);
-  overflow-x: hidden;
-}
+
 
 /* === LAYOUT GENERAL === */
 
@@ -39,23 +30,6 @@ input[type="color"] {
   font-size: 0.9rem;
 }
 
-button {
-  cursor: pointer;
-}
-
-/* Sidebar izquierda */
-.col-md-2,
-.col-md-3 {
-  background-color: #86b1e9 !important;
-  color: white;
-  border-radius: 12px;
-}
-
-.col-md-2 input,
-.col-md-3 input,
-.col-md-3 .form-check-label {
-  color: #000;
-}
 
 .form-check-input:checked {
   background-color: var(--naranja);
@@ -102,21 +76,6 @@ button {
   margin-top: 20px;
 }
 
-/* === SLIDES MINIATURAS === */
-
-#slides-container {
-  background-color: #bdbaba;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  overflow-x: auto;
-  min-height: 72px;
-  flex-wrap: wrap;
-}
-
 .slide-thumb {
   width: 80px;
   height: 70px;
@@ -132,10 +91,7 @@ button {
   transition: border-color 0.2s ease;
 }
 
-.slide-thumb.active-slide {
-  border-color: #2d80ee;
-  background-color: #e8f0fe;
-}
+
 
 /* Botones de mover slide */
 .move-btn {
@@ -158,100 +114,7 @@ button {
   right: -8px;
 }
 
-/* === CONTENIDO SLIDE === */
 
-.slide-title {
-  background-color: #f8d7da;
-  padding: 1rem;
-  text-align: center;
-}
-
-.slide-img {
-  background-color: #d1ecf1;
-  height: 720px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-#slide-img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-/* === PREGUNTAS === */
-
-.question-container {
-  background-color: #d4edda;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-
-/* formato de slides */
-
-#slideCardContainer {
-  height: 100%;
-}
-
-.custom-text-card {
-  height: 100%;
-  text-align: center;
-}
-
-.custom-img-card-onlyImg {
-  height: 60vh;
-  /* 75% altura del contenedor total */
-  flex-direction: colum;
-}
-
-.custom-img-card {
-  height: 60vh;
-  /* 75% altura del contenedor total */
-  flex-direction: colum;
-}
-
-.custom-img-card-img {
-  max-height: 60vh;
-  max-width: 100%;
-  height: auto;
-  width: auto;
-  display: block;
-  object-fit: contain;
-  background-color: #f0f0f0;
-}
-
-.custom-img-card-img-onlyImg {
-  height: 100%;
-  max-height: max-content;
-  max-width: 100%;
-  width: auto;
-  display: block;
-  object-fit: contain;
-  margin: auto;
-  background-color: #f0f0f0;
-}
-
-.custom-img-card-body {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0.5rem;
-}
-
-.custom-ask-card {
-  height: 100%;
-}
-
-.contenedor {
-  display: grid;
-  place-items: center;
-  height: 200px;
-}
 
 .option-box {
   background: #fff;

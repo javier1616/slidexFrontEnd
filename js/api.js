@@ -1,16 +1,17 @@
-import { USER_SERVICE_URL } from '../data/config.js';
-import { SESSION_SERVICE_URL } from '../data/config.js';
-import { PRESENTATION_SERVICE_URL } from '../data/config.js';
+import { USER_SERVICE_URL } from "../data/config.js";
+import { SESSION_SERVICE_URL } from "../data/config.js";
+import { PRESENTATION_SERVICE_URL } from "../data/config.js";
+import { HISTORY_SERVICE_URL } from "../../data/config.js";
 
 export async function loginUser(email, password) {
   try {
-    const url = USER_SERVICE_URL + 'api/Auth/login';
+    const url = USER_SERVICE_URL + "api/Auth/login";
     const response = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ email, password }),
     });
 
     if (!response.ok) {
@@ -18,25 +19,24 @@ export async function loginUser(email, password) {
     }
 
     const data = await response.json();
-    console.log('Respuesta del login:', data);
+    console.log("Respuesta del login:", data);
     return data;
   } catch (error) {
-    console.error('Error en la llamada login:', error);
+    console.error("Error en la llamada login:", error);
     throw error;
   }
 }
 
 export async function getSessionByAccessCode(accessCode, token) {
   try {
-
     const url = `${SESSION_SERVICE_URL}session/${accessCode}`;
 
     const response = await fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     const data = await response.json();
@@ -45,161 +45,174 @@ export async function getSessionByAccessCode(accessCode, token) {
       return data;
     }
 
-    const error = new Error(data.message || 'Error');
+    const error = new Error(data.message || "Error");
     error.status = response.status;
     throw error;
-
   } catch (error) {
-    console.error('Error al obtener sesión por accessCode:', error);
+    console.error("Error al obtener sesión por accessCode:", error);
     throw error;
   }
 }
 
+export async function endSession(sessionId, token) {
+  try {
+    const url = `${SESSION_SERVICE_URL}session/logout/${sessionId}`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      console.log(data);
+      return data;
+    }
+
+    const error = new Error(data.message || "Error");
+    error.status = response.status;
+    throw error;
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+    throw error;
+  }
+}
 
 export async function createParticipant(user, session, token) {
-
-
   const url = `${SESSION_SERVICE_URL}participant/create`;
 
   const body = {
-    'idUser': user,
-    'idSession': session
-  }
+    idUser: user,
+    idSession: session,
+  };
 
   console.log(body);
 
   try {
     const response = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     });
 
     const data = await response.json();
 
     if (response.ok) {
-      console.log('user added as participant', data);
+      console.log("user added as participant", data);
       return data;
     }
 
-    const error = new Error(data.message || 'Error');
+    const error = new Error(data.message || "Error");
     error.status = response.status;
     throw error;
-
   } catch (error) {
-    console.error('Error al agregar el usuario como participante', error);
+    console.error("Error al agregar el usuario como participante", error);
     throw error;
   }
 }
-
 
 export async function getPresentationById(presentationId, token) {
   try {
-
     const url = `${PRESENTATION_SERVICE_URL}Presentation/GetById/${presentationId}`;
 
     const response = await fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     const data = await response.json();
 
     if (response.ok) {
-      console.log('Presentación encontrada: ', data);
+      console.log("Presentación encontrada: ", data);
       return data;
     }
 
-    const error = new Error(data.message || 'Error');
+    const error = new Error(data.message || "Error");
     error.status = response.status;
     throw error;
-
   } catch (error) {
-    console.error('Error al obtener sesión por accessCode:', error);
+    console.error("Error al obtener sesión por accessCode:", error);
     throw error;
   }
 }
-
 
 export async function getPresentationAll(token) {
   try {
-
     const url = `${PRESENTATION_SERVICE_URL}Presentation/GetAll`;
 
     const response = await fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     const data = await response.json();
 
     if (response.ok) {
-      console.log('Presentaciones encontradas: ', data);
+      console.log("Presentaciones encontradas: ", data);
       return data;
     }
 
-    const error = new Error(data.message || 'Error');
+    const error = new Error(data.message || "Error");
     error.status = response.status;
     throw error;
-
   } catch (error) {
-    console.error('Error al obtener todas las presentaciones:', error);
+    console.error("Error al obtener todas las presentaciones:", error);
     throw error;
   }
 }
-
 
 export async function getPresentationsByUser(userId, token) {
   try {
-
     const url = `${PRESENTATION_SERVICE_URL}Presentation/GetUserPresentations/${userId}`;
 
     const response = await fetch(url, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     const data = await response.json();
 
     if (response.ok) {
-      console.log('Presentaciones encontradas: ', data);
+      console.log("Presentaciones encontradas: ", data);
       return data;
     }
 
-    const error = new Error(data.message || 'Error');
+    const error = new Error(data.message || "Error");
     error.status = response.status;
     throw error;
-
   } catch (error) {
-    console.error('Error al obtener todas las presentaciones:', error);
+    console.error("Error al obtener todas las presentaciones:", error);
     throw error;
   }
 }
-
 
 export async function createPresentationBackend(data, token) {
   try {
     const url = `${PRESENTATION_SERVICE_URL}presentation/create`;
 
     const response = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
         //,'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
 
     const result = await response.json();
@@ -207,15 +220,14 @@ export async function createPresentationBackend(data, token) {
     console.log(result);
 
     if (!response.ok) {
-      const error = new Error(result.message || 'Error al crear presentación');
+      const error = new Error(result.message || "Error al crear presentación");
       error.status = response.status;
       throw error;
     }
 
     return result;
-
   } catch (error) {
-    console.error('Error al crear presentación:', error);
+    console.error("Error al crear presentación:", error);
     throw error;
   }
 }
@@ -225,12 +237,12 @@ export async function updatePresentationBackend(data, token) {
     const url = `${PRESENTATION_SERVICE_URL}presentation/update/${data.id}`;
 
     const response = await fetch(url, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
 
     const result = await response.json();
@@ -238,19 +250,17 @@ export async function updatePresentationBackend(data, token) {
     console.log(result);
 
     if (!response.ok) {
-      const error = new Error(result.message || 'Error al crear presentación');
+      const error = new Error(result.message || "Error al crear presentación");
       error.status = response.status;
       throw error;
     }
 
     return result;
-
   } catch (error) {
-    console.error('Error al modificar la presentación:', error);
+    console.error("Error al modificar la presentación:", error);
     throw error;
   }
 }
-
 
 export async function deletePresentationBackend(id, token) {
   try {
@@ -258,18 +268,17 @@ export async function deletePresentationBackend(id, token) {
 
     console.log(url);
 
-
     const response = await fetch(url, {
-      method: 'DELETE', 
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     if (!response.ok) {
       // Intentar parsear JSON solo si hay contenido
-      let errorMessage = 'Error al eliminar la presentación';
+      let errorMessage = "Error al eliminar la presentación";
       try {
         const result = await response.json();
         errorMessage = result.message || errorMessage;
@@ -281,16 +290,13 @@ export async function deletePresentationBackend(id, token) {
       throw error;
     }
     // O simplemente retornar true si todo OK:
-    console.log('Presentación ' + id + ' eliminada con éxito');
+    console.log("Presentación " + id + " eliminada con éxito");
     return true;
-
   } catch (error) {
-    console.error('Error al eliminar la presentación:', error);
+    console.error("Error al eliminar la presentación:", error);
     throw error;
   }
 }
-
-
 
 export async function createSlide(data) {
   const res = await fetch(`${API_URL}/Slide`, {
@@ -349,6 +355,78 @@ export async function recoverPassword(requestData) {
 
     console.log("Respuesta del recuperar: 200OK");
     return true;
+  } catch (error) {
+    console.error("Error en la llamada recuperar:", error);
+    throw error;
+  }
+}
+
+export async function getMetricsForPresentDate(id) {
+  try {
+    const url = HISTORY_SERVICE_URL + `/History/${id}/sessions`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Error al obtener sesiones:", errorText);
+      return;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error en la llamada recuperar:", error);
+    throw error;
+  }
+}
+
+export async function getMetricsForSessionGuid(guid) {
+  try {
+    const url = HISTORY_SERVICE_URL + `/History/${guid}/metricas`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Error al obtener sesiones:", errorText);
+      return;
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error en la llamada recuperar:", error);
+    throw error;
+  }
+}
+
+export async function SessionDuration(guid) {
+  try {
+    const url = SESSION_SERVICE_URL + `session/${guid}/duration`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Error al obtener sesiones:", errorText);
+      return;
+    }
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error("Error en la llamada recuperar:", error);
     throw error;

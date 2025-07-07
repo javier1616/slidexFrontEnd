@@ -1,47 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SlideX</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SlideX</title>
+    <!-- Boostrap icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
 
-  <!-- Boostrap icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
-  <!-- Bootstrap CSS 
+    <!-- Bootstrap CSS 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   -->
-  <link rel="stylesheet" href="/css/bootstrap.css">
-  <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
 
-  <link rel="icon" type="image/png" href="./img/favicon.png">
-  <link rel="stylesheet" href="./css/slides.css">
-  <link rel="stylesheet" href="./css/presentations.css">
-  <link rel="stylesheet" href="./css/navbar.css">
-  <link rel="stylesheet" href="./css/utils.css">
-  <link rel="stylesheet" href="./css/landing.css">
-  <link rel="stylesheet" href="./css/user.css">
-  <link rel="stylesheet" href="./css/animations.css">
-  <link rel="stylesheet" href="./css/joinSession.css">
-</head>
+    <link rel="icon" type="image/png" href="./img/favicon.png" />
+    <link rel="stylesheet" href="./css/slides.css" />
+    <link rel="stylesheet" href="./css/presentations.css" />
+    <link rel="stylesheet" href="./css/navbar.css" />
+    <link rel="stylesheet" href="./css/utils.css" />
+    <link rel="stylesheet" href="./css/user.css" />
+    <link rel="stylesheet" href="./css/animations.css" />
+    <link rel="stylesheet" href="./css/joinSession.css" />
+    <link rel="stylesheet" href="./css/active_slides.css" />
+    <link rel="stylesheet" href="./css//create_presentations.css" />
+    <link rel="stylesheet" href="./css/metrics.css">
+  </head>
 
-<body>
+  <body>
+    <div id="app"></div>
+    <!-- Aquí se cargan dinámicamente las vistas -->
 
-  <div id="app"></div> <!-- Aquí se cargan dinámicamente las vistas -->
+    <div id="modal"></div>
+    <!-- Se utiliza cuando necesitas un modal -->
+    <!-- chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="./js/views/metrics.js"></script>
 
-  <div id="modal"></div> <!-- Se utiliza cuando necesitas un modal -->
-
-  <!-- Bootstrap JS Bundle 
+    <!-- Bootstrap JS Bundle 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   -->
-  <script src="/js/bootstrap.bundle.js"></script>
-  <script type="module" src="./js/main.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script src="/js/bootstrap.bundle.js"></script>
+    <script type="module" src="./js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
 
-  <!-- qrcode.js -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-
-</body>
-
+    <!-- qrcode.js -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  </body>
 </html>

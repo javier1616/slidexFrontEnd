@@ -3,23 +3,27 @@ import { createPresentationBackend } from "../api.js";
 
 const template = `
 ${Navbar()}
-<div class="container-fluid p-4">
-  <label>Título de la Presentación</label>
-  <input id="input-presentation-title" type="text" class="form-control mb-2" />
+<div class="container-fluid create-presentation-container">
+  <div class="presentation-title-section">
+    <label>Título de la Presentación</label>
+    <input id="input-presentation-title" type="text" class="form-control" placeholder="Ingresa el título de tu presentación..." />
+  </div>
 
   <div class="row g-3">
-    <div class="col-md-2 bg-info text-white rounded p-3">
-      <label>Título</label>
-      <input id="input-title" type="text" class="form-control mb-2" />
+    <div class="col-md-2">
+      <div class="controls-panel">
+        <label>Título</label>
+        <input id="input-title" type="text" class="form-control" placeholder="Título del slide..." />
 
-      <label>Contenido</label>
-      <input id="input-subtitle" type="text" class="form-control mb-2" />
+        <label>Contenido</label>
+        <input id="input-subtitle" type="text" class="form-control" placeholder="Contenido del slide..." />
 
-      <label>URL Imagen</label>
-      <input id="input-img" type="text" class="form-control mb-2" />
+        <label>URL Imagen</label>
+        <input id="input-img" type="text" class="form-control" placeholder="https://ejemplo.com/imagen.jpg" />
 
-      <label>Color de fondo</label>
-      <input id="input-bg" type="color" class="form-control form-control-color" />
+        <label>Color de fondo</label>
+        <input id="input-bg" type="color" class="form-control form-control-color" />
+      </div>
     </div>
 
     <div class="col-md-7">
@@ -30,22 +34,26 @@ ${Navbar()}
       </div>
     </div>
 
-    <div class="col-md-3 bg-info text-white rounded p-3">
-      <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="toggleQuestion" />
-        <label class="form-check-label" for="toggleQuestion">Agregar pregunta</label>
-      </div>
+    <div class="col-md-3">
+      <div class="question-panel">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="toggleQuestion" />
+          <label class="form-check-label" for="toggleQuestion">Agregar pregunta</label>
+        </div>
 
-      <div id="questionSection" class="mt-3" style="display:none;">
-        <label>Pregunta</label>
-        <input id="input-question" type="text" class="form-control mb-2" />
-        <div id="options-container"></div>
-        <button class="btn btn-light w-100" id="btn-add-option">+</button>
+        <div id="questionSection" class="mt-3" style="display:none;">
+          <label>Pregunta</label>
+          <input id="input-question" type="text" class="my-2 form-control" placeholder="Escribe tu pregunta..." />
+          <div id="options-container"></div>
+          <button class="btn btn-light w-100" id="btn-add-option" data-tooltip="Agregar nueva opción">+</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="mt-4 rounded p-3 d-flex align-items-center" id="slides-container"></div>
+  <div class="mt-4">
+    <div id="slides-container" class="animate-fade-in"></div>
+  </div>
 </div>`;
 
 export default async function createPresentation() {

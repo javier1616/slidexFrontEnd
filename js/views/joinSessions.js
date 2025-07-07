@@ -38,7 +38,7 @@ export default () => {
               <div class="quick-actions">
                 <p class="quick-actions-text">¿No tienes un código de sesión?</p>
                 <a href="#/presentations" class="btn-secondary-modern">Crear nueva sesión</a>
-                <a href="/help" class="btn-secondary-modern">Ayuda</a>
+                <a href="#/about" class="btn-secondary-modern">Ayuda</a>
               </div>
             </div>
           </div>

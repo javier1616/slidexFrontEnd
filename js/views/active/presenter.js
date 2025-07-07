@@ -4,16 +4,19 @@ export default async () => {
   return `
     ${Navbar()}
 
-    
-    <!-- ***** Contenido ***** -->
-    <div class="slide-wrapper d-flex flex-column overflow-hidden px-3 py-2">
+    <!-- Contenedor principal -->
+    <div class="slide-wrapper">
 
       <!-- Barra de estado -->
-      <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
+      <div class="status-bar d-flex justify-content-center align-items-center gap-2 mb-2">
         <span>Status:</span>
         <span id="sessionStatusSpan" class="text-danger fw-bold">Not Connected</span>
         <span>Session code:</span>
         <span id="sessionCodeSpan" class="text-danger fw-bold"></span>
+        <button id="share-links-modal-btn" type="button" class="not-raised btn-slide-nav btn-primary p-2" title="Compartir enlaces">
+          <i class="bi bi-link-45deg fs-3 m-0"></i>
+          <i class="bi bi-qr-code fs-3 m-0"></i>
+        </button>
       </div>
 
       <!-- Zona principal -->
@@ -22,21 +25,19 @@ export default async () => {
         <!-- Contenedor del slide -->
         <div id="slide-container"
              class="col-12 col-lg-10 d-flex flex-column h-100 overflow-hidden p-0 border rounded bg-white shadow-sm">
-          <!-- aquí inyectarás el slide dinámico -->
+          <!-- Slide dinámico aquí -->
         </div>
 
-        <!-- Lista de manos levantadas (opcional, quítala si no la usas) -->
-        <div class="raise-hand-list-container">
-          <h6 class="text-center text-primary mb-3">Manos levantadas</h6>
-          <ul id="raise-hand-list" class="list-group small p-3">
-            
+        <!-- Lista de manos levantadas -->
+        <div class="raise-hand-list-container col-12 col-lg-2">
+          <h5 class="slide-title text-center mb-3">MANOS LEVANTADAS</h5>
+          <ul id="raise-hand-list" class="list-group small p-5 m-0 overflow-auto" style="max-height: 400px;">
+            <!-- Lista dinámica -->
           </ul>
         </div>
 
       </div>
 
-
-      
       <!-- Navegación -->
       <div class="d-flex justify-content-center flex-wrap gap-3 p-3 mt-3">
 
@@ -49,10 +50,10 @@ export default async () => {
         </button>
 
         <button id="btn_goto" class="btn btn-secondary d-none" disabled>
-          <i class="bi bi-box-arrow-in-right"></i> Go to
+          <i class="bi bi-box-arrow-in-right"></i> Go to
         </button>
 
-        <input id="goToInput" class="form-control d-none" style="width:4rem" placeholder="#" disabled />
+        <input id="goToInput" class="form-control d-none" style="width: 4rem;" placeholder="#" disabled />
 
         <button id="btn_next" class="btn-slide-nav">
           Siguiente <i class="bi bi-arrow-right-circle-fill"></i>
@@ -67,6 +68,7 @@ export default async () => {
         </button>
 
       </div>
+
     </div>
   `;
 };

@@ -340,3 +340,28 @@
     gap: 1rem;
     flex-grow: 0;
 }
+
+
+/* 1️⃣  – Quita el !important o acótalo al breakpoint grande  */
+.custom-navbar-2 .navbar-collapse {
+    /* display: flex !important;  💀 quítalo o déjalo sin !important */
+    display: flex;                 /* visible sólo cuando .show lo requiera */
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  /* 2️⃣ – Deja que Bootstrap decida en móviles */
+  @media (min-width: 992px) {      /* .navbar-expand-lg */
+    .custom-navbar-2 .navbar-collapse {
+      display: flex !important;    /* ahora sí, solo a partir de lg */
+    }
+  }
+  
+  @media (max-width: 991.98px) {
+    /* cuando no esté abierta (.show) debe ocultarse */
+    .custom-navbar-2 .navbar-collapse:not(.show) {
+      display: none !important;    /* respeta el colapso */
+    }
+  }
+  
