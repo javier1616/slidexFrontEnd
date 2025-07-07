@@ -8,9 +8,9 @@ export const API_URL = 'https://localhost:7112/api/v1/'
 */
 
 
-const SESSION_MS_TUNNEL = 'documents-left-clearly-styles'
-const PRESENTATION_MS_TUNNEL = 'colleagues-amenities-journalism-handbook'
-const USER_MS_TUNNEL = 'qualifying-decorative-thirty-manufacturing'
+const SESSION_MS_TUNNEL = 'documents-left-clearly-styles.trycloudflare.com'
+const PRESENTATION_MS_TUNNEL = 'colleagues-amenities-journalism-handbook.trycloudflare.com'
+const USER_MS_TUNNEL = 'qualifying-decorative-thirty-manufacturing.trycloudflare.com'
 //const HISTORY_MS_TUNNEL = ''
 
 export const USER_SERVICE_URL = `https://${USER_MS_TUNNEL}/`
