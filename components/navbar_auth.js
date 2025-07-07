@@ -1,9 +1,11 @@
+import { LOGO_URL } from "../data/config";
+
 export default () => {
   return `
   <nav class="navbar navbar-expand-lg custom-navbar-2">
     <div class="container-fluid">
       <a class="navbar-brand fade-in d-flex align-items-center" href="#/home">
-      <img src="http://127.0.0.1:5501/img/favicon.png" alt="SlideX logo" width="72" height="65" class="me-2">
+      <img src=${LOGO_URL} alt="SlideX logo" width="72" height="65" class="me-2">
       SlideX
       </a>
 
