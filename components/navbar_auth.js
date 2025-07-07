@@ -1,4 +1,3 @@
-import { LOGO_URL } from "../data/config";
 
 export default () => {
   return `
