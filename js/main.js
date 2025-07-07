@@ -297,8 +297,39 @@ document.addEventListener('submit', async (event) => {
             localStorage.setItem('token_type', token_type);
             localStorage.setItem('user_id', user_id);
 
+            //Si se loguea desde QR / url con sessionCode redirecciona
+            //como participante a una conexion con esa session
+            //sino va directo a su home
+
+            console.log("verificando si se loguea con accesscode")
+            
+            const session = sessionStorage.getItem("joinSession");
+            console.log("joinSession");
+            console.log(session);
+
+            if (session == null)
+            {
+                // Redirección al home del usuario
+                location.hash = '#/presentations';
+            }
+            else
+            {
+                console.log("se loguea desde link compartido... uniendose a la session");
+                // Inicio sesion como participante con ese codigo de session
+
+                //dispara los mismos eventos que si presionas el boton join-session-btn
+                //no puedo enviar el evento click porque hace un getElementById de algo
+                //que no existe porque estoy en la pagina de login
+
+                localStorage.setItem("accessCode", session); 
+                location.hash = `#/active/participant/${session}`;
+                await joinSessionHandler();
+
+            }
+
             // Redirección a /SesionIniciada
-            location.hash = '#/presentations';
+            //location.hash = '#/presentations';
+
         } catch (error) {
             alert('Error al loguearse ', error);
         } finally {
